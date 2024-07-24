@@ -9,7 +9,7 @@ import { AiOutlineClose } from "react-icons/ai"
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false)
 
-  const loggedIn = true;
+  const loggedIn = false;
 
   const handleShowDropDown = () => setShowDropdown(prev => true)
   const handleHideDropDown = () => setShowDropdown(prev => false)
