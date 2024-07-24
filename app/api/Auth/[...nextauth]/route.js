@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import User from "@/models/User";
 import { connect } from "../../../../lib/db";
+import { signJwtToken } from "@/lib/jwt";
 
 const authOptions = {
     providers: [
@@ -27,12 +28,44 @@ const authOptions = {
                         throw new Error("Paaswords don't match")
                     } else {
                         const { password, ...currentUser } = user._doc;
-                        const accessToken = 
-                    }
-                } catch() {
+                        const accessToken = signJwtToken(currentUser, {expireIn: "7days"})
 
+                        return {
+                            ...currentUser,
+                            accessToken
+                        }
+                    }
+                } catch(error) {
+                    console.log(error)
                 }
             }
         })
-    ]
-}
+    ],
+    pages: {
+        signIn: "/login"
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    callbacks: {
+        async jwt({token, user}) {
+            if(user) {
+                token.accessToken = user.accessToken;
+                token._id = user._id;
+            }
+
+            return token;
+        },
+
+        async session({session, token}) {
+            if(token) {
+                session.user._id = token._id;
+                session.user.accessToken = token.accessToken
+            }
+    
+            return session;
+        },
+    },
+};
+
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST };
