@@ -8,10 +8,20 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
     try {
-        const data = await req.json();
-        console.log(data)
+        await connect();
+        const { name, email, password } = await req.json();
 
-        return NextResponse.json("new data", {status: 201})
+        const isExisting = await User.findOne({email})
+
+        if(isExisting) {
+            return NextResponse.json({ErrorMessage: "User already exists"})
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10)
+
+        const newUser = await User.create({name, email, password: hashedPassword})
+
+        return NextResponse.json(newUser, {status: 201})
     } catch(error) {
         return NextResponse.json({message: "POST error (Sign up)"})
     }
