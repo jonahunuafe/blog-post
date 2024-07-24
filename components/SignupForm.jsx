@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Input from './Input'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const initialState = {
     name: "",
@@ -16,11 +17,67 @@ const SignupForm = () => {
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { name, email, password } = state;
+
+    if(!name || !email || !password) {
+        setError("All fields are required");
+        return;
+    }
+
+  //Regular expression pattern for a basic email validation
+  const pattern = /^[a-zA-z0-9._-]+@[a-zA-z0-9.-]+\.[a-zA-Z]{2,4}/
+
+  if(!pattern.test(email)) {
+    setError("Please enter a valid email address.")
+    return;
+  }
+
+  if(password.length < 6) {
+    setError("Password must be at least 6 characters long.")
+    return;
+  }
+
+  try {
+    setIsLoading(true);
+    const newUser = {
+        name, email, password
+    }
+
+    const response  = await fetch("http://localhost:3000/api/signup", 
+    {    headers: {
+            "Content-Type": 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(newUser)
+    })
+
+    if(response?.status === 201) {
+        setSuccess("Registration Successful");
+        setTimeout(() => {
+            router.push("/login", {scroll: false})
+        }, 1000)
+    } else {
+        setError("Error occured while registering")
+    }
+
+  } catch(error) {
+    console.log(error)
+  }
+
+  setIsLoading(false);
+
+  }
+
+
   const handleChange = (event) => {
     setError("")
     setState({...state, [event.target.name]: event.target.value})
   }
-
 
   return (
     <section className='container'>
@@ -57,7 +114,7 @@ const SignupForm = () => {
                 success && <div className='text-green-700'>{success}</div>
             }
             
-            <button type='submit' className='btn w-full'>
+            <button type='submit' className='btn w-full disabled'>
                 {isLoading ? "Loading" : "Sign up"} 
             </button>
 

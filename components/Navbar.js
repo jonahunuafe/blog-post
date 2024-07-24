@@ -21,7 +21,7 @@ const Navbar = () => {
     <div className="container py-2 h-16 flex items-center justify-between">
         <Link href="/">
             <h2>
-                Light <span className="special-word">Code.</span>
+                Jonah <span className="special-word">Blog</span>
             </h2>
         </Link>
 
