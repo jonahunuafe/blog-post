@@ -5,8 +5,11 @@ import Link from 'next/link'
 import Image from 'next/image';
 import Jonah from "../public/image/jonah.jpeg"
 import { AiOutlineClose } from "react-icons/ai"
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
+  const pathname =usePathname();
+
   const [showDropdown, setShowDropdown] = useState(false)
 
   const loggedIn = false;
@@ -24,14 +27,24 @@ const Navbar = () => {
 
         <ul className="flex items-center gap-3">
             <li>
-                <Link href="/blog">Blog</Link>
+                <Link 
+                    href="/blog" 
+                    className={ pathname === "/blog" ? "text-primaryColor font-bold" : "" } 
+                >
+                    Blog
+                </Link>
             </li>
 
             {
                 loggedIn ? (
                 <>
                     <li>
-                        <Link href="/create-blog">Create</Link>
+                        <Link 
+                            href="/create-blog"
+                            className={ pathname === "/create-blog" ? "text-primaryColor font-bold" : "" }
+                        >
+                            Create
+                        </Link>
                     </li>
                     <li>
                         <div className="relative">
@@ -62,10 +75,20 @@ const Navbar = () => {
                 ) : (
                     <>
                         <li>
-                            <Link href="/login">Log In</Link>
+                            <Link 
+                                href="/login"
+                                className={ pathname === "/login" ? "text-primaryColor font-bold" : "" }
+                            >
+                                Log In
+                            </Link>
                         </li>
                         <li>
-                            <Link href="/signup">Sign Up</Link>
+                            <Link 
+                                href="/signup"
+                                className={ pathname === "/signup" ? "text-primaryColor font-bold" : "" }
+                            >
+                                Sign Up
+                            </Link>
                         </li>
                     </>
                 )
