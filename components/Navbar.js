@@ -12,6 +12,7 @@ const Navbar = () => {
   const loggedIn = true;
 
   const handleShowDropDown = () => setShowDropdown(prev => true)
+  const handleHideDropDown = () => setShowDropdown(prev => false)
   
   return (
     <div className="container py-2 h-16 flex items-center justify-between">
@@ -45,9 +46,13 @@ const Navbar = () => {
                             {
                                 showDropdown && (
                                     <div className="absolute top-0 right-0 bg-primaryColorLight p-5">
-                                        <AiOutlineClose className="w-full cursor-pointer"/>
-                                        <button>Logout</button>
-                                        <Link href="/user">Profile</Link>
+                                        <AiOutlineClose onClick={handleHideDropDown} 
+                                            className="w-full cursor-pointer"
+                                        />
+                                        <button onClick={handleHideDropDown}>Logout</button>
+                                        <Link onClick={handleHideDropDown} href="/user">
+                                            Profile
+                                        </Link>
                                     </div>
                                 )
                             }
