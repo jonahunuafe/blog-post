@@ -6,8 +6,11 @@ import Image from 'next/image';
 import Jonah from "../public/image/jonah.jpeg"
 import { AiOutlineClose } from "react-icons/ai"
 import { usePathname } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
+  const { data: session, status } = useSession();
+
   const pathname =usePathname();
 
   const [showDropdown, setShowDropdown] = useState(false)
@@ -36,7 +39,7 @@ const Navbar = () => {
             </li>
 
             {
-                loggedIn ? (
+                session?.user ? (
                 <>
                     <li>
                         <Link 
