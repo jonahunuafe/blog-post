@@ -114,7 +114,7 @@ const SignupForm = () => {
                 success && <div className='text-green-700'>{success}</div>
             }
             
-            <button type='submit' className='btn w-full disabled'>
+            <button type='submit' className='btn w-full'>
                 {isLoading ? "Loading" : "Sign up"} 
             </button>
 

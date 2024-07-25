@@ -15,8 +15,6 @@ const Navbar = () => {
 
   const [showDropdown, setShowDropdown] = useState(false)
 
-  const loggedIn = false;
-
   const handleShowDropDown = () => setShowDropdown(prev => true)
   const handleHideDropDown = () => setShowDropdown(prev => false)
   
@@ -65,7 +63,7 @@ const Navbar = () => {
                                         <AiOutlineClose onClick={handleHideDropDown} 
                                             className="w-full cursor-pointer"
                                         />
-                                        <button onClick={handleHideDropDown}>Logout</button>
+                                        <button onClick={() => {signOut(); handleHideDropDown()}}>Logout</button>
                                         <Link onClick={handleHideDropDown} href="/user">
                                             Profile
                                         </Link>
