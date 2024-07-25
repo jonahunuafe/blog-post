@@ -25,7 +25,7 @@ const authOptions = {
                     const passwordMatch = await bcrypt.compare(password, user.password);
 
                     if(!passwordMatch) {
-                        throw new Error("Paaswords don't match")
+                        throw new Error("Passwords do not match")
                     } else {
                         const { password, ...currentUser } = user._doc;
                         const accessToken = signJwtToken(currentUser, {expireIn: "7days"})
