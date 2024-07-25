@@ -5,7 +5,7 @@ import User from "@/models/User";
 import { connect } from "../../../../lib/db";
 import { signJwtToken } from "@/lib/jwt";
 
-const authOptions = {
+export const authOptions = {
     providers: [
         CredentialsProvider({
             type: "credentials",
