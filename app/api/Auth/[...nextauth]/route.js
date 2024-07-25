@@ -28,7 +28,7 @@ const authOptions = {
                         throw new Error("Passwords do not match")
                     } else {
                         const { password, ...currentUser } = user._doc;
-                        const accessToken = signJwtToken(currentUser, {expireIn: "7days"})
+                        const accessToken = signJwtToken(currentUser)
 
                         return {
                             ...currentUser,

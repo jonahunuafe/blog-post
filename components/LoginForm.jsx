@@ -25,8 +25,8 @@ const LoginForm = () => {
     const { email, password } = state;
 
     if(!email || !password) {
-        setError("All fields are required");
-        return;
+      setError("All fields are required");
+      return;
     }
 
   //Regular expression pattern for a basic email validation
@@ -75,7 +75,7 @@ const LoginForm = () => {
             <h2 className='text-center special-word'>Login</h2>
 
             <Input
-                label='Emal'
+                label='Email'
                 type='text'
                 name='email' 
                 onChange={handleChange}
@@ -104,7 +104,7 @@ const LoginForm = () => {
             <p className='text-center'>
                 Need an account? {" "}
                 <Link href="/signup" className='text-primaryColor'>
-                    Sign up
+                  Sign up
                 </Link>
             </p>
         </form>
