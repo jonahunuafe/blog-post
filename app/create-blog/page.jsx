@@ -73,7 +73,7 @@ const CreateBlog = () => {
       return;
     }
 
-    if(description.length > 20) {
+    if(description.length < 20) {
       setError("Description must be at least 20 characters long.")
       return;
     }
