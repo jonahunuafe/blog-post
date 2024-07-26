@@ -19,6 +19,9 @@ const initialState = {
 }
 
 const CreateBlog = () => {
+  const CLOUD_NAME="dn7lmikzs"
+  const UPLOAD_PRESET="nextjs_blogpost_images"
+
   const [state, setState] = useState(initialState);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -41,7 +44,7 @@ const CreateBlog = () => {
     const { name, value, type, files } = event.target;
 
     if(type === "file") {
-      setState({...state, [name]: files(0)})
+      setState({...state, [name]: files[0]});
     } else {
       setState({...state, [name]: value})
     }
@@ -84,6 +87,74 @@ const CreateBlog = () => {
       setError("Quote must be at least 6 characters long.")
       return;
     }
+
+    try {
+      setIsLoading(true)
+      setError("")
+      setSuccess("")
+      const image =  await uploadImage();
+
+      const newBlog = {
+        title,
+        description,
+        excerpt,
+        quote,
+        category,
+        image,
+        //We can get the authorId from session
+        authorId: session?.user?._id
+      }
+
+      const response  = await fetch("http://localhost:3000/api/blog", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session?.user?.accessToken}`
+        },
+        method: "POST",
+        body: JSON.stringify(newBlog)
+      })
+
+      if(response?.status === 201) {
+        setSuccess("Blog created successfully");
+        setTimeout(() => {
+          router.refresh();
+          router.push("/blog")
+        }, 1500);
+      } else {
+        setError("Error occured while creating blog.")
+      }
+    } catch(error) {
+      console.log(error);
+      setError("Error occured while creating blog.")
+    }
+
+    setIsLoading(false)
+  }
+
+  const uploadImage = async () => {
+    if(!state.photo) return;
+
+    const formData = new FormData();
+
+    formData.append("file", state.photo);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    try {
+      const res = await fetch(`http://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      const image = {
+        id: data["public_id"],
+        url: data["secure_url"]
+      }
+
+      return image;
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -91,7 +162,7 @@ const CreateBlog = () => {
       <h2 className="mb-5">
         <span className="special-word">Create</span> Blog
       </h2>
-      <form className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <Input
           label="Title"
           type="text"
@@ -136,27 +207,39 @@ const CreateBlog = () => {
             value={state.category}
             className="block rounded-lg w-full p-3 bg-primaryColorLight"
           >
-            <option value="Songbirds"></option>
-            <option value="Waterfowl"></option>
-            <option value="Parrots"></option>
-            <option value="Seabirds"></option>
-            <option value="Gamebirds"></option>
+            <option value="Songbirds">Songbirds</option>
+            <option value="Waterfowl">Waterfowl</option>
+            <option value="Parrots">Parrots</option>
+            <option value="Seabirds">Seabirds</option>
+            <option value="Gamebirds">Gamebirds</option>
           </select>
         </div>
 
         <div>
           <label className="block mb-2 text-sm font-medium">Upload Image</label>
 
-          <input type="file" name="photo" accept="image/*" ></input>
-
-          <Image 
-            src={demoImg} 
-            alt="sample imaage" 
-            width={0} 
-            height={0} 
-            sizes="100vw" 
-            className="w-32 mt-5" 
+          <input 
+            onChange={handleChange} 
+            type="file" 
+            name="photo" 
+            accept="image/*" 
           />
+
+          {
+            state.photo && (
+              <div>
+                <Image 
+                  src={URL.createObjectURL(state.photo)} 
+                  priority
+                  alt="sample imaage" 
+                  width={0} 
+                  height={0} 
+                  sizes="100vw" 
+                className="w-32 mt-5" 
+                />
+              </div>
+            )
+          }
         </div>
 
         {
