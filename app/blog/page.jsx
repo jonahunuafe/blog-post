@@ -1,4 +1,5 @@
 import React from 'react'
+import FirstBlog from '@/components/FirstBlog';
 
 async function fetchBlogs() {
   const res = await fetch("http://localhost:3000/api/blog", {
@@ -14,9 +15,21 @@ async function fetchBlogs() {
 
 const Blog = async () => {
   const blogs = await fetchBlogs();
-  console.log(blogs);
+
+  const firstBlog = blogs && blogs[0];
+
   return (
-    <div>Blog</div>
+    <div>
+      {
+        blogs?.length > 0 ? (
+          <>
+            <FirstBlog firstBlog={firstBlog} />
+          </>
+        ): (
+          <h3>No Blogs.</h3>
+        )
+      }
+    </div>
   )
 }
 
