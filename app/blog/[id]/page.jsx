@@ -135,7 +135,22 @@ const BlogDetails = ({ params }) => {
 
           <div className="text-start">
             <div className="space-y-5">
-              <p>description goes here</p>
+              {
+                blogDetails?.description && splitParagraph(blogDetails?.description)
+                .map((paragraph, pIndex) => (
+                  <div key={pIndex}>
+                    {pIndex === Math.floor(splitParagraph(blogDetails?.description).length / 2) && (
+                      <blockquote className="border-l-4 border-primaryColor border-spacing-6 italic">
+                        <p className="ml-5">
+                          {blogDetails?.quote}
+                        </p>
+                      </blockquote>
+                    )}
+
+                    {paragraph}
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
