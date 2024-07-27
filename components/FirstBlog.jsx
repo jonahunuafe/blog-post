@@ -57,9 +57,9 @@ const FirstBlog = ({ firstBlog }) => {
                         />
 
                         <div className="text-xs">
-                            <h6>{firstBlog?.authorId?.avatar?.name}</h6>
+                            <h6>{firstBlog?.authorId?.name}</h6>
                             <p className="text-paragraphColor">
-                                {firstBlog?.authorId?.avatar?.designation}
+                                {firstBlog?.authorId?.designation}
                             </p>
                         </div>
                     </div>
