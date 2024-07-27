@@ -2,7 +2,7 @@
 
 
 import Blog from "@/models/Blog";
-import {connect} from "../../../lib/db"
+import {connect} from "../../../../lib/db"
 import { NextResponse } from "next/server";
 import { verifyJwtToken } from "@/lib/jwt";
 

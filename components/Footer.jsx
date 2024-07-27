@@ -7,7 +7,7 @@ const Footer = () => {
     <div className='py-10 text-center'>
         Copyright &copy; 2024 All rights reserved.
         <br />
-        Coded by JonahDev.
+        JonahDev.
     </div>
   )
 }
