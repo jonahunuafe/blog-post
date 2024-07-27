@@ -1,4 +1,4 @@
-// http://localhost:3000/api/blog
+// http://localhost:3000/api/blog/someid
 
 
 import Blog from "@/models/Blog";
@@ -67,5 +67,42 @@ export async function GET(req, res) {          //We get the id from the response
 
     } catch(error) {
         return NextResponse.json({message: "GET error"}, {status: 500}) 
+    }
+}
+
+
+export async function DELETE(req, res) {
+    await connect();
+
+    const id = res.params.id;
+
+    const accessToken = req.headers.get("authorization");
+    // [bearer, token]
+    const token = accessToken.split(" ")[1]
+
+    const decodedToken = verifyJwtToken(token);
+
+    if(!accessToken || !decodedToken) {
+        return NextResponse.json(
+            {error: "unathorized (wrong or expired token)"},
+            {status: 403}
+        );
+    }
+
+    try {
+        const blog = Blog.findById(id).populate("authorId");
+
+        if(blog?.authorId?._id.toString() !== decodedToken._id.toString()) {
+            return NextResponse.json(
+                {msg: "Only author can delete his/her blog"},
+                {status: 403}
+            );
+        }
+
+        await Blog.findByIdAndDelete(id)
+
+        return NextResponse.json({msg: "Successfully deleted Blog"}, {status: 200});
+    } catch (error) {
+        return NextResponse.json({message: "Delete error"}, {status: 500})
     }
 }
