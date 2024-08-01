@@ -7,7 +7,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import TextArea from "@/components/TextArea"
 import Image from "next/image"
-import demoImg from "../../../../public/image/jonah.jpeg"
+import demoImg from "../../../../public/image/jonah.jpeg";
+import { deletePhoto } from "@/actions/uploadActions";
 
 const initialState = {
   title: "",
@@ -131,11 +132,13 @@ const EditBlog = ({ params }) => {
         image =  await uploadImage();
 
         if(state.photo?.id) {
-            
+            await deletePhoto(state.photo.id)
+        } else {
+            image = state.photo;
         }
       }
 
-      const newBlog = {
+      const updateBlog = {
         title,
         description,
         excerpt,
@@ -146,38 +149,38 @@ const EditBlog = ({ params }) => {
         authorId: session?.user?._id
       }
 
-      const response  = await fetch("http://localhost:3000/api/blog", {
+      const response  = await fetch(`http://localhost:3000/api/blog/${params.id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${session?.user?.accessToken}`
         },
-        method: "POST",
-        body: JSON.stringify(newBlog)
+        method: "PUT",
+        body: JSON.stringify(updateBlog)
       })
 
-      if(response?.status === 201) {
-        setSuccess("Blog created successfully");
+      if(response?.status === 200) {
+        setSuccess("updated created successfully");
         setTimeout(() => {
           router.refresh();
-          router.push("/blog")
+          router.push(`/blog/${params.id}`)
         }, 1500);
       } else {
-        setError("Error occured while creating blog.")
+        setError("Error occured while updating blog.")
       }
     } catch(error) {
       console.log(error);
-      setError("Error occured while creating blog.")
+      setError("Error occured while updating blog.")
     }
 
     setIsLoading(false)
   }
 
   const uploadImage = async () => {
-    if(!state.photo) return;
+    if(!state.newImage) return;
 
     const formData = new FormData();
 
-    formData.append("file", state.photo);
+    formData.append("file", state.newImage);
     formData.append("upload_preset", UPLOAD_PRESET);
 
     try {
@@ -198,10 +201,14 @@ const EditBlog = ({ params }) => {
     }
   }
 
+  const handleCancelUploadImg = () => {
+    setState({...state, ["newImage"]: ""})
+  }
+
   return (
     <section className="container max-w-3xl">
       <h2 className="mb-5">
-        <span className="special-word">Create</span> Blog
+        <span className="special-word">Edit</span> Blog
       </h2>
       <form onSubmit={handleSubmit} className="space-y-5">
         <Input
@@ -262,15 +269,14 @@ const EditBlog = ({ params }) => {
           <input 
             onChange={handleChange} 
             type="file" 
-            name="photo" 
+            name="newImage" 
             accept="image/*" 
           />
 
-          {
-            state.photo && state.photo["url"] && (
-              <div>
+          {state.newImage ? (
+            <div>
                 <Image 
-                  src={state.photo.url} 
+                  src={URL.createObjectURL(state.newImage)} 
                   priority
                   alt="sample imaage" 
                   width={0} 
@@ -278,9 +284,29 @@ const EditBlog = ({ params }) => {
                   sizes="100vw" 
                 className="w-32 mt-5" 
                 />
-              </div>
-            )
-          }
+
+                <button onClick={handleCancelUploadImg}>Cancel</button>
+            </div>
+
+          ): (
+            <div>
+                {
+                  state.photo && state.photo["url"] && (
+                    <div>
+                      <Image 
+                        src={state.photo.url} 
+                        priority
+                        alt="sample imaage" 
+                        width={0} 
+                        height={0} 
+                        sizes="100vw" 
+                      className="w-32 mt-5" 
+                      />
+                    </div>
+                  )
+                }
+            </div>
+          )}
         </div>
 
         {
