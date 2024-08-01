@@ -56,7 +56,7 @@ const CreateBlog = () => {
     const { photo, title, category, description, excerpt, quote } = state;
 
     if(!title || !description || !category || !excerpt || !quote) {
-      setError("Pleae fill out all required fields.")
+      setError("Please fill out all required fields.")
       return;
     }
 

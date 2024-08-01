@@ -7,7 +7,6 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import TextArea from "@/components/TextArea"
 import Image from "next/image"
-import demoImg from "../../../../public/image/jonah.jpeg";
 import { deletePhoto } from "@/actions/uploadActions";
 
 const initialState = {
@@ -43,17 +42,17 @@ const EditBlog = ({ params }) => {
                 const blogData = await res.json();
 
                 setState(prevState => ({
-                    ...prevState, 
-                    title: blogData.title,
-                    description: blogData.description,
-                    excerpt: blogData.excerpt,
-                    quote: blogData.quote,
-                    category: blogData.category,
-                    photo: blogData.photo,
-                    blogId: blogData._id,
+                  ...prevState, 
+                  title: blogData.title,
+                  description: blogData.description,
+                  excerpt: blogData.excerpt,
+                  quote: blogData.quote,
+                  category: blogData.category,
+                  photo: blogData.image,
+                  blogId: blogData._id,
                 }))
             } else {
-                setError("Error fetching blog data");
+              setError("Error fetching blog data");
             }
         } catch(error) {
             setError("Error fetching blog data");
@@ -89,7 +88,7 @@ const EditBlog = ({ params }) => {
     const { newImage, title, category, description, excerpt, quote } = state;
 
     if(!title || !description || !category || !excerpt || !quote) {
-      setError("Pleae fill out all required fields.")
+      setError("Please fill out all required fields.")
       return;
     }
 
@@ -132,9 +131,9 @@ const EditBlog = ({ params }) => {
         image =  await uploadImage();
 
         if(state.photo?.id) {
-            await deletePhoto(state.photo.id)
+          await deletePhoto(state.photo.id)
         } else {
-            image = state.photo;
+          image = state.photo;
         }
       }
 
@@ -159,7 +158,7 @@ const EditBlog = ({ params }) => {
       })
 
       if(response?.status === 200) {
-        setSuccess("updated created successfully");
+        setSuccess("Blog updated successfully");
         setTimeout(() => {
           router.refresh();
           router.push(`/blog/${params.id}`)
@@ -318,7 +317,7 @@ const EditBlog = ({ params }) => {
         }
             
         <button type='submit' className='btn'>
-          {isLoading ? "Loading" : "Create"} 
+          {isLoading ? "Loading" : "Edit"} 
         </button>
       </form>
     </section>

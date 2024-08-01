@@ -17,6 +17,7 @@ import { BsFillPencilFill, BsTrash } from "react-icons/bs";
 
 import demoImg from "../../../public/image/jonah.jpeg";
 import Input from '@/components/Input';
+import { deletePhoto } from '@/actions/uploadActions';
 
 function splitParagraph(paragraph) {
   const MIN_LENGTH = 200;
@@ -48,6 +49,7 @@ function splitParagraph(paragraph) {
 
 const BlogDetails = ({ params }) => {
   const [blogDetails, setBlogDetails] = useState({});
+  const [isDeleting, setIsDeleting] = useState(false);
 
   
   const router = useRouter();
@@ -70,6 +72,32 @@ const BlogDetails = ({ params }) => {
   const timeStr = blogDetails?.createdAt;
   const time = moment(timeStr);
   const formattedTime = time.format("MMMM Do YYYY");
+
+  const handleBlogDelete = async (imageId) => {
+    try {
+      const confirmModal = window.confirm("Are you sure you want to delete your blog?");
+
+      if(confirmModal) {
+        setIsDeleting(true);
+        const response = await fetch(`http://localhost:3000/api/blog/${params.id}`, {
+          method: DELETE, 
+          headers: {
+            Authorization: `Bearer ${session?.user?.accessToken}`
+          }
+        })
+
+        if(response?.status === 200) {
+          await deletePhoto(imageId);
+          router.refresh()
+          router.push('/blog')
+        }
+      }
+
+      setIsDeleting(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
   return (
     <section className="container max-w-3xl">
@@ -81,7 +109,7 @@ const BlogDetails = ({ params }) => {
             Edit
           </Link>
 
-          <button className="flex items-center gap-1 text-red-500">
+          <button onClick={() => handleBlogDelete?.blogDetails?.image?.id} className="flex items-center gap-1 text-red-500">
             <BsTrash />
             Delete
           </button>
