@@ -85,16 +85,16 @@ const EditBlog = ({ params }) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-    const { photo, title, category, description, excerpt, quote } = state;
+    const { newImage, title, category, description, excerpt, quote } = state;
 
     if(!title || !description || !category || !excerpt || !quote) {
       setError("Pleae fill out all required fields.")
       return;
     }
 
-    if(photo) {
+    if(newImage) {
       const maxSize = 5 * 1024 * 1024;  //5MB in bytes
-      if(photo.size > maxSize) {
+      if(newImage.size > maxSize) {
         setError("File is too large. Please select a file under 5MB.")
         return;
       }
@@ -124,7 +124,16 @@ const EditBlog = ({ params }) => {
       setIsLoading(true)
       setError("")
       setSuccess("")
-      const image =  await uploadImage();
+
+      let image;
+
+      if(state.newImage) {
+        image =  await uploadImage();
+
+        if(state.photo?.id) {
+            
+        }
+      }
 
       const newBlog = {
         title,
