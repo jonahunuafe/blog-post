@@ -76,7 +76,7 @@ const BlogDetails = ({ params }) => {
       {
         blogDetails?.authorId?._id.toString() === session?.user?._id.toString() && (
         <div className="flex items-center justify-end gap-5">
-          <Link href="" className="flex items-center gap-1 text-primaryColor">
+          <Link href={`/blog/edit/${params.id}`} className="flex items-center gap-1 text-primaryColor">
             <BsFillPencilFill />
             Edit
           </Link>
@@ -140,7 +140,7 @@ const BlogDetails = ({ params }) => {
                 .map((paragraph, pIndex) => (
                   <div key={pIndex}>
                     {pIndex === Math.floor(splitParagraph(blogDetails?.description).length / 2) && (
-                      <blockquote className="border-l-4 border-primaryColor border-spacing-6 italic">
+                      <blockquote className="border-l-4 border-primaryColor border-spacing-6 italic mb-5">
                         <p className="ml-5">
                           {blogDetails?.quote}
                         </p>
