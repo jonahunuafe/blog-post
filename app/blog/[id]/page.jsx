@@ -80,7 +80,7 @@ const BlogDetails = ({ params }) => {
       if(confirmModal) {
         setIsDeleting(true);
         const response = await fetch(`http://localhost:3000/api/blog/${params.id}`, {
-          method: DELETE, 
+          method: "DELETE", 
           headers: {
             Authorization: `Bearer ${session?.user?.accessToken}`
           }
@@ -109,7 +109,7 @@ const BlogDetails = ({ params }) => {
             Edit
           </Link>
 
-          <button onClick={() => handleBlogDelete?.blogDetails?.image?.id} className="flex items-center gap-1 text-red-500">
+          <button onClick={() => handleBlogDelete(blogDetails?.image?.id)} className="flex items-center gap-1 text-red-500">
             <BsTrash />
             Delete
           </button>
