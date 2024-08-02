@@ -75,29 +75,35 @@ const BlogDetails = ({ params }) => {
 
   const handleBlogDelete = async (imageId) => {
     try {
-      const confirmModal = window.confirm("Are you sure you want to delete your blog?");
+      const confirmModal = window.confirm(
+        "Are you sure you want to delete your blog?"
+      );
 
-      if(confirmModal) {
+      if (confirmModal) {
         setIsDeleting(true);
-        const response = await fetch(`http://localhost:3000/api/blog/${params.id}`, {
-          method: "DELETE", 
-          headers: {
-            Authorization: `Bearer ${session?.user?.accessToken}`
+        const response = await fetch(
+          `http://localhost:3000/api/blog/${params.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${session?.user?.accessToken}`,
+            },
           }
-        })
+        );
 
-        if(response?.status === 200) {
+        if (response?.status === 200) {
           await deletePhoto(imageId);
-          router.refresh()
-          router.push('/blog')
+          router.refresh();
+          router.push("/blog");
         }
       }
 
-      setIsDeleting(false)
+      setIsDeleting(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
   
   return (
     <section className="container max-w-3xl">
