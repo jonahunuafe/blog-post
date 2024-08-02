@@ -8,7 +8,7 @@ import moment from "moment";
 import Modal from "@/components/Modal";
 import { deletePhoto } from "@/actions/uploadActions";
 import Input from "@/components/Input";
-import demoImage from "@/public/img/demo_image.jpg";
+import demoImage from "../../../public/image/jonah.jpeg";
 import { AiOutlineClose } from "react-icons/ai";
 
 const ProfileDetails = ({ profile, params }) => {

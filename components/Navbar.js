@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image';
 import Jonah from "../public/image/jonah.jpeg"
@@ -9,11 +9,28 @@ import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
+  const [userData, setUserData] = useState({})
   const { data: session, status } = useSession();
 
   const pathname =usePathname();
 
   const [showDropdown, setShowDropdown] = useState(false)
+
+  async function fetchUser() {
+    try {
+        const res = await fetch(`http://localhost:3000/api/user/${session?.user?._id}`);
+
+        const resData = await res.json();
+
+        setUserData(resData)
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+    useEffect(() => {
+        fetchUser();
+    },[session?.user?._id])
 
   const handleShowDropDown = () => setShowDropdown(prev => true)
   const handleHideDropDown = () => setShowDropdown(prev => false)
@@ -64,7 +81,10 @@ const Navbar = () => {
                                             className="w-full cursor-pointer"
                                         />
                                         <button onClick={() => {signOut(); handleHideDropDown()}}>Logout</button>
-                                        <Link onClick={handleHideDropDown} href="/user">
+                                        <Link 
+                                            onClick={handleHideDropDown} 
+                                            href={`/user/${session?.user?._id.toString()}`}
+                                        >
                                             Profile
                                         </Link>
                                     </div>
