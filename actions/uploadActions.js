@@ -16,3 +16,27 @@ export async function deletePhoto(public_id) {
         return ({errorMessage: error.message});
     }
 }
+
+
+export async function deleteManyPhotos(publicIdsToDelete) {
+    try{
+        const deleteResponses = await Promise.all(
+            publicIdsToDelete.map(async (item) => {
+                const public_id = item.id;
+
+                try{
+                    const result = await cloudinary.v2.uploader.destroy(public_id);
+                    return {public_id, result}
+                } catch(error) {
+                    console.log(error);
+                    return {errMessage: error.message}
+                }
+            })
+        )
+
+        return deleteResponses;
+    } catch(error) {
+        console.log(error);
+        return {errMessage: error.message}
+    }
+}
