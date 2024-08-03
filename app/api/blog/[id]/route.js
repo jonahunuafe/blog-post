@@ -53,11 +53,11 @@ export async function GET(req, res) {
     const blog = await Blog.findById(id)
       .populate({
         path: "authorId",
-        select: "password",
+        select: "-password",
       })
       .populate({
         path: "comments.user",
-        select: "password",
+        select: "-password",
       });
 
     return NextResponse.json(blog, { status: 200 });

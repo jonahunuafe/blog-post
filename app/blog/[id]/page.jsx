@@ -225,7 +225,7 @@ const BlogDetails = ({ params }) => {
             className="flex items-center gap-1 text-primaryColor"
           >
             <BsFillPencilFill />
-            Edit
+              Edit
           </Link>
 
           <button
@@ -378,11 +378,16 @@ const BlogDetails = ({ params }) => {
                   <p>{comment.text}</p>
                 </div>
 
-                {session?.user?._id === comment?.user?._id && (
-
-                <BsTrash onClick={() => handleDeleteComment(comment._id)} cursor="pointer" className="text-red-500 ml-10" />
-                )}
-
+                {
+                  session?.user?._id === comment?.user?._id && 
+                  (
+                    <BsTrash 
+                      onClick={() => handleDeleteComment(comment._id)} 
+                      cursor="pointer" 
+                      className="text-red-500 ml-10" 
+                    />
+                  )
+                }
               </div>
             ))}
           </>

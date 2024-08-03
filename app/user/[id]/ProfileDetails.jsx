@@ -12,8 +12,8 @@ import demoImage from "../../../public/image/jonah.jpeg";
 import { AiOutlineClose } from "react-icons/ai";
 
 const ProfileDetails = ({ profile, params }) => {
-  const CLOUD_NAME = "";
-  const UPLOAD_PRESET = "";
+  const CLOUD_NAME = "dn7lmikzs";
+  const UPLOAD_PRESET = "nextjs_blogpost_images";
 
   const [profileToEdit, setProfileToEdit] = useState(profile);
   const [avatarToEdit, setAvatarToEdit] = useState("");
