@@ -25,9 +25,9 @@ export async function PUT(req, res) {
     const blog = await Blog.findById(id);
 
     if(blog.likes.includes(decodedToken._id)) {
-        blog.likes = blog.likes.filter(id => id.toString() !== decodedToken._id.toString());
+      blog.likes = blog.likes.filter(id => id.toString() !== decodedToken._id.toString());
     } else {
-        blog.likes.push(decodedToken._id)
+      blog.likes.push(decodedToken._id)
     }
 
     await blog.save();

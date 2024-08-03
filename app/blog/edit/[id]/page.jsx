@@ -36,26 +36,26 @@ const EditBlog = ({ params }) => {
   useEffect(() => {
     async function fetchBlog() {
         try {
-            const res = await fetch(`http://localhost:3000/api/blog/${params.id}`);
-            
-            if(res.status === 200) {
-                const blogData = await res.json();
+          const res = await fetch(`http://localhost:3000/api/blog/${params.id}`);
+          
+          if(res.status === 200) {
+              const blogData = await res.json();
 
-                setState(prevState => ({
-                  ...prevState, 
-                  title: blogData.title,
-                  description: blogData.description,
-                  excerpt: blogData.excerpt,
-                  quote: blogData.quote,
-                  category: blogData.category,
-                  photo: blogData.image,
-                  blogId: blogData._id,
-                }))
-            } else {
-              setError("Error fetching blog data");
-            }
-        } catch(error) {
+              setState(prevState => ({
+                ...prevState, 
+                title: blogData.title,
+                description: blogData.description,
+                excerpt: blogData.excerpt,
+                quote: blogData.quote,
+                category: blogData.category,
+                photo: blogData.image,
+                blogId: blogData._id,
+              }))
+          } else {
             setError("Error fetching blog data");
+          }
+        } catch(error) {
+          setError("Error fetching blog data");
         }
     }
 

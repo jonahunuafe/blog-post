@@ -15,7 +15,7 @@ import {
 } from "react-icons/ai";
 import { BsFillPencilFill, BsTrash } from "react-icons/bs";
 
-import demoImage from "@/public/img/demo_image.jpg";
+import demoImage from "../../../public/image/jonah.jpeg";
 import Input from "@/components/Input";
 import { deletePhoto } from "@/actions/uploadActions";
 
@@ -58,7 +58,7 @@ const BlogDetails = ({ params }) => {
   const [blogComments, setBlogComments] = useState(0);
 
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("")
+  const [success, setSuccess] = useState("");
 
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -244,8 +244,8 @@ const BlogDetails = ({ params }) => {
             <Image
               src={
                 blogDetails?.authorId?.avatar?.url
-                  ? blogDetails?.authorId?.avatar?.url
-                  : demoImage
+                ? blogDetails?.authorId?.avatar?.url
+                : demoImage
               }
               alt="avatar image"
               width={0}
