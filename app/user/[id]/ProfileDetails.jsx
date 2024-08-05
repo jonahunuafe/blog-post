@@ -168,7 +168,7 @@ const ProfileDetails = ({ profile, params }) => {
 
       <div className="flex flex-col md:flex-row gap-5">
         <div className="flex-1 space-y-3">
-          <h4 className="text-xl">About Me</h4>
+          <h4 className="text-xl text-center lg:text-left">About Me</h4>
           <p>{profile?.about}</p>
         </div>
 
@@ -186,28 +186,24 @@ const ProfileDetails = ({ profile, params }) => {
         <div className="flex-1 space-y-3">
           <h4 className="text-xl">Details</h4>
 
-          <div className="space-y-1 flex items-center">
+          <div className="space-y-1">
             <p>Email: {profile?.email}</p>
           </div>
 
           <div className="space-y-1">
-            <p>Name:</p>
-            <p>{profile?.name}</p>
+            <p>Name: {profile?.name}</p>
           </div>
 
           <div className="space-y-1">
-            <p>Age:</p>
-            <p>{profile?.age}</p>
+            <p>Age: {profile?.age}</p>
           </div>
 
           <div className="space-y-1">
-            <p>Location:</p>
-            <p>{profile?.location}</p>
+            <p>Location: {profile?.location}</p>
           </div>
 
           <div className="space-y-1">
-            <p>Joined:</p>
-            <p>{timeFormat()}</p>
+            <p>Joined: {timeFormat()}</p>
           </div>
         </div>
       </div>
