@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Jonah from "../public/image/jonah.jpeg"
+import demoImg from "../public/image/home_bird.png"
 
 export default function Home() {
   return (
@@ -17,13 +17,13 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="hidden md:block basis-1/3">
+      <div className="hidden md:block basis-1/3 mt-14">
         <Image 
-          src={Jonah} 
-          alt="avatar"
-          sizes="100vw"
-          className="w-full h-auto"
-          />
+        src={demoImg} 
+        alt="avatar"
+        sizes="100vw"
+        className="w-full h-auto"
+        />
       </div>
     </div>
   );

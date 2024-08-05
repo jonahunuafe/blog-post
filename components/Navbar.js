@@ -34,14 +34,14 @@ const Navbar = () => {
     const handleShowDropdown = () => setShowDropdown(prev => true)
     const handleHideDropdown = () => setShowDropdown(prev => false)
   return (
-    <div className='container py-2 h-16 flex items-center justify-between'>
+    <div className='container py-2 h-16 flex items-center justify-between relative'>
         <Link href="/">
             <h2>
                 Light<span className='special-word'>Code.</span>
             </h2>
         </Link>
 
-        <ul className='flex items-center gap-3'>
+        <ul className='flex items-center gap-3 absolute top-0 right-0 md:relative mt-5 mr-4 md:mt-0 md:mr-0'>
             <li>
                 <Link href="/blog" className={ pathname === '/blog' ? "text-primaryColor font-bold" : ""}>Blog</Link>
             </li>
@@ -65,7 +65,7 @@ const Navbar = () => {
                                 />
 
                                 {showDropdown && (
-                                    <div className='absolute top-0 right-0 bg-primaryColorLight p-5'>
+                                    <div className='absolute top-0 right-0 bg-primaryColorLight p-5 flex flex-col gap-5 rounded'>
                                         <AiOutlineClose onClick={handleHideDropdown} className='w-full cursor-pointer' />
                                         <button onClick={() => {signOut(); handleHideDropdown();}}>Logout</button>
                                         <Link onClick={handleHideDropdown} href={`/user/${session?.user?._id.toString()}`}>Profile</Link>

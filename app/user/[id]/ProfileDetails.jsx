@@ -186,9 +186,8 @@ const ProfileDetails = ({ profile, params }) => {
         <div className="flex-1 space-y-3">
           <h4 className="text-xl">Details</h4>
 
-          <div className="space-y-1">
-            <p>Email:</p>
-            <p>{profile?.email}</p>
+          <div className="space-y-1 flex items-center">
+            <p>Email: {profile?.email}</p>
           </div>
 
           <div className="space-y-1">
