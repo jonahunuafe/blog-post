@@ -12,7 +12,7 @@ const FirstBlog = ({ firstBlog }) => {
   return (
     <section>
         <Link href={`/blog/${firstBlog?._id}`}>
-            <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex flex-col md:flex-row items-center bg-gray-800 gap-8 md:gap-10">
                 <div className="w-full lg:w-2/5">
                     <Image 
                         src={firstBlog?.image ? firstBlog.image?.url : demoImg}
@@ -24,7 +24,7 @@ const FirstBlog = ({ firstBlog }) => {
                     />
                 </div>
 
-                <div className="w-full lg:w-3/5 space-y-5">
+                <div className="w-full lg:w-3/5 space-y-5 pl-3 pb-4 lg:pl-0 lg:pb-0">
                     <div className="flex items-center gap-3 text-xs">
                         <p className="text-primaryColor">{firstBlog?.category}</p>
 

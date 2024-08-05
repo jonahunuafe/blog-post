@@ -216,7 +216,7 @@ const BlogDetails = ({ params }) => {
   }
 
   return (
-    <section className="container max-w-3xl">
+    <section className="container max-w-3xl overflow-hidden">
       {blogDetails?.authorId?._id.toString() ===
         session?.user?._id.toString() && (
         <div className="flex items-center justify-end gap-5">
@@ -238,7 +238,7 @@ const BlogDetails = ({ params }) => {
         </div>
       )}
 
-      <div className="flex flex-col items-center justify-center">
+      <div>
         <Link href={`/user/${blogDetails?.authorId?._id.toString()}`}>
           <div className="flex flex-col justify-center items-center py-10">
             <Image

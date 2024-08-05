@@ -26,7 +26,7 @@ const OtherBlogs = ({ otherBlogs }) => {
                                 className="w-full h-full rounded-lg mb-2" 
                             />
 
-                            <div className="space-y-2">
+                            <div className="space-y-2 bg-gray-800 p-4">
                                 <div className="flex items-center gap-3 text-xs">
                                     <p className="text-primaryColor">{item?.category}</p>
 
