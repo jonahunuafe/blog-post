@@ -7,7 +7,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import TextArea from "@/components/TextArea"
 import Image from "next/image"
-import demoImg from "../../public/image/jonah.jpeg"
+import demoImg from "../../public/image/avatar-icon.png"
 
 const initialState = {
   title: "",
