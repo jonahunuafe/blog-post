@@ -37,7 +37,7 @@ const Navbar = () => {
     <div className='container py-2 h-16 flex items-center justify-between relative'>
         <Link href="/">
             <h2 className='absolute bottom-4'>
-                Light<span className='special-word'>Code.</span>
+                Jonahs<span className='special-word'>Blog.</span>
             </h2>
         </Link>
 
