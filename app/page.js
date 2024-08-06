@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="container flex flex-col md:flex-row gap-5 h-[calc(100vh-4rem)]">
       <div className="basis-full flex flex-col justify-center md:basis-2/3/">
-        <p className="special-word text-sm">Protect All the Birds</p>
+        <p className="special-word text-sm">Protect All Birds</p>
         <h1 className="pb-5">
           The world's <span className="special-word">Rarest</span><br /> Birds
         </h1>

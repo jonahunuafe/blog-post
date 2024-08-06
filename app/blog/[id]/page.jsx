@@ -15,7 +15,7 @@ import {
 } from "react-icons/ai";
 import { BsFillPencilFill, BsTrash } from "react-icons/bs";
 
-import demoImage from "../../../public/image/jonah.jpeg";
+import demoImage from "../../../public/image/avatar-icon.png";
 import Input from "@/components/Input";
 import { deletePhoto } from "@/actions/uploadActions";
 

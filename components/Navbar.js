@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import demoImage from '../public/image/jonah.jpeg'
+import demoImage from "../public/image/avatar-icon.png"
 import {AiOutlineClose} from 'react-icons/ai'
 import { usePathname } from 'next/navigation'
 import {signOut, useSession} from 'next-auth/react'

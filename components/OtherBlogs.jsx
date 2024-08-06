@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import demoImg from "../public/image/jonah.jpeg"
+import demoImg from "../public/image/avatar-icon.png"
 import Link from 'next/link'
 import { AiTwotoneCalendar } from 'react-icons/ai'
 import moment from 'moment'
