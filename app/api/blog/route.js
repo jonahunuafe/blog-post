@@ -39,7 +39,7 @@ export async function GET(req) {
     try {
         const blogs = await Blog.find({}).populate({
             path: "authorId",
-            select: "password"
+            select: "-password"
         }).sort({ createdAt: -1 })
 
         return NextResponse.json(blogs);
