@@ -1,13 +1,11 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { useSession } from "next-auth/react"
-import Input from "@/components/Input"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import TextArea from "@/components/TextArea"
-import Image from "next/image"
-import demoImg from "../../public/image/avatar-icon.png"
+import React, { useState } from "react";
+import { useSession } from "next-auth/react";
+import Input from "@/components/Input";
+import { useRouter } from "next/navigation";
+import TextArea from "@/components/TextArea";
+import Image from "next/image";
 
 const initialState = {
   title: "",
@@ -235,7 +233,7 @@ const CreateBlog = () => {
                   width={0} 
                   height={0} 
                   sizes="100vw" 
-                className="w-32 mt-5" 
+                  className="w-32 mt-5" 
                 />
               </div>
             )
