@@ -35,7 +35,7 @@ const Blog = async () => {
             </div>
           </>
         ): (
-          <h3>No Blogs.</h3>
+          <h3 className="text-center mt-20">No Blogs.</h3>
         )
       }
     </div>

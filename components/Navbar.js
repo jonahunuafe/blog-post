@@ -36,12 +36,12 @@ const Navbar = () => {
   return (
     <div className='container py-2 h-16 flex items-center justify-between relative'>
         <Link href="/">
-            <h2>
+            <h2 className='absolute bottom-4'>
                 Light<span className='special-word'>Code.</span>
             </h2>
         </Link>
 
-        <ul className='flex items-center gap-3 absolute top-0 right-0 md:relative mt-5 mr-4 md:mt-0 md:mr-0'>
+        <ul className='flex items-center gap-3'>
             <li>
                 <Link href="/blog" className={ pathname === '/blog' ? "text-primaryColor font-bold" : ""}>Blog</Link>
             </li>
