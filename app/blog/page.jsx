@@ -3,7 +3,9 @@ import FirstBlog from '@/components/FirstBlog';
 import OtherBlogs from '@/components/OtherBlogs';
 
 async function fetchBlogs() {
-  const res = await fetch("http://localhost:3000/api/blog", {
+  const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  const res = await fetch(`${apiUrl}/api/blog`, {
     cache: "no-store"
   });
 

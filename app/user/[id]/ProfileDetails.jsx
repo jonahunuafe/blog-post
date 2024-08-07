@@ -14,6 +14,7 @@ import { AiOutlineClose } from "react-icons/ai";
 const ProfileDetails = ({ profile, params }) => {
   const CLOUD_NAME = "dn7lmikzs";
   const UPLOAD_PRESET = "nextjs_blogpost_images";
+  const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const [profileToEdit, setProfileToEdit] = useState(profile);
   const [avatarToEdit, setAvatarToEdit] = useState("");
@@ -75,7 +76,7 @@ const ProfileDetails = ({ profile, params }) => {
       };
 
       const response = await fetch(
-        `http://localhost:3000/api/user/${params.id}`,
+        `${apiUrl}/api/user/${params.id}`,
         {
           headers: {
             "Content-Type": "application/json",

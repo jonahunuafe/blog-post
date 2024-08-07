@@ -48,6 +48,8 @@ function splitParagraph(paragraph) {
 }
 
 const BlogDetails = ({ params }) => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
   const [blogDetails, setBlogDetails] = useState({});
   const [isDeleting, setIsDeleting] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -66,7 +68,7 @@ const BlogDetails = ({ params }) => {
   async function fetchBlog() {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/blog/${params.id}`
+        `${apiUrl}/api/blog/${params.id}`
       );
       const blog = await response.json();
       setBlogDetails(blog);
@@ -95,7 +97,7 @@ const BlogDetails = ({ params }) => {
       if (confirmModal) {
         setIsDeleting(true);
         const response = await fetch(
-          `http://localhost:3000/api/blog/${params.id}`,
+          `${apiUrl}/api/blog/${params.id}`,
           {
             method: "DELETE",
             headers: {
@@ -125,7 +127,7 @@ const BlogDetails = ({ params }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/blog/${params.id}/like`,
+        `${apiUrl}/api/blog/${params.id}/like`,
         {
           method: "PUT",
           headers: {
@@ -164,7 +166,7 @@ const BlogDetails = ({ params }) => {
       };
 
       const response = await fetch(
-        `http://localhost:3000/api/blog/${params.id}/comment`,
+        `${apiUrl}/api/blog/${params.id}/comment`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -195,7 +197,7 @@ const BlogDetails = ({ params }) => {
   const handleDeleteComment = async(commentId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/blog/${params.id}/comment/${commentId}`,
+        `${apiUrl}/api/blog/${params.id}/comment/${commentId}`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -12,6 +12,8 @@ const initialState = {
 };
 
 const SignupForm = () => {
+  const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
   const [hydrated, setHydrated] = useState(false);
   const [state, setState] = useState(initialState);
   const [error, setError] = useState("");
@@ -60,7 +62,7 @@ const SignupForm = () => {
         password,
       };
 
-      const response = await fetch("http://localhost:3000/api/signup", {
+      const response = await fetch(`${apiUrl}/api/signup`, {
         headers: {
           "Content-Type": "application/json",
         },
