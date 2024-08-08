@@ -19,7 +19,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="hidden md:block basis-1/3 mt-14">
+      <div className="hidden md:block basis-1/3 mt-24">
         <Image 
         src={demoImg} 
         alt="avatar"

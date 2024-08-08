@@ -9,7 +9,7 @@ const Login = async () => {
 
   if(session) redirect("/blog");
   return (
-    <div>
+    <div className='py-20 h-[100vh]'>
       <LoginForm />
     </div>
   )

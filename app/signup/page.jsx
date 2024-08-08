@@ -10,7 +10,7 @@ const Signup = async () => {
   if(session) redirect("/blog");
 
   return (
-    <div>
+    <div className='py-20 h-[100vh]'>
       <SignupForm />
     </div>
   )
