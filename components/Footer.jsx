@@ -4,7 +4,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='py-10 text-center'>
+    <div className='bg-slate-800 sticky bottom-0 w-[100%] text-center py-5'>
       Copyright &copy; 2024 All rights reserved.
       <br />
       JonahDev.
@@ -12,4 +12,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default Footer;

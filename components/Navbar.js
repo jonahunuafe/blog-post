@@ -4,18 +4,21 @@ import Link from 'next/link'
 import Image from 'next/image'
 import demoImage from "../public/image/avatar-icon.png"
 import {AiOutlineClose} from 'react-icons/ai'
+import {AiOutlineBars} from 'react-icons/ai'
 import { usePathname } from 'next/navigation'
 import {signOut, useSession} from 'next-auth/react'
 
 const Navbar = () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-    
+
     const [userData, setUserData] = useState({});
     const {data: session, status} = useSession();
 
     const pathname = usePathname();
 
     const [showDropdown, setShowDropdown] = useState(false)
+
+    const [style, setStyle] = useState(false);
 
     async function fetchUser() {
         try {
@@ -35,6 +38,11 @@ const Navbar = () => {
 
     const handleShowDropdown = () => setShowDropdown(prev => true)
     const handleHideDropdown = () => setShowDropdown(prev => false)
+
+    const disappear = () => {
+        setStyle(!false)
+    }
+
   return (
     <div className='container py-2 h-16 flex items-center justify-between relative'>
         <Link href="/">
@@ -44,6 +52,23 @@ const Navbar = () => {
         </Link>
 
         <ul className='flex items-center gap-3'>
+            {/* <div>
+                <AiOutlineBars 
+                    onClick={handleShowDropdown}
+
+                />
+
+                {
+                    showDropdown && (
+                        <p>
+                            <AiOutlineClose 
+                                onClick={handleHideDropdown}
+                            />
+                            <h3>Good</h3>
+                        </p>
+                    )
+                }
+            </div> */}
             <li>
                 <Link href="/blog" className={ pathname === '/blog' ? "text-primaryColor font-bold" : ""}>Blog</Link>
             </li>
