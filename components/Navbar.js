@@ -44,9 +44,9 @@ const Navbar = () => {
     }
 
   return (
-    <div className='container py-2 h-16 flex items-center justify-between relative'>
+    <div className='py-2 px-4 md:px-8 h-16 flex items-center justify-between fixed bg-gray-800 w-[100%]'>
         <Link href="/">
-            <h2 className='absolute bottom-4'>
+            <h2>
                 Jonahs<span className='special-word'>Blog.</span>
             </h2>
         </Link>

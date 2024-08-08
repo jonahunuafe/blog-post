@@ -91,7 +91,7 @@ const SignupForm = () => {
   };
 
   return (
-    <section className="container">
+    <section className="container h-[100vh]">
       <form
         onSubmit={handleSubmit}
         className="border-2 border-paragraphColor rounded-lg max-w-sm mx-auto px-8 py-6 space-y-5"
