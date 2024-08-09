@@ -23,11 +23,11 @@ const Blog = async () => {
   const otherBlogs = blogs?.length > 0 && blogs.slice(1);
 
   return (
-    <div className="h-[100vh]">
+    <>
       {
         blogs?.length > 0 ? (
           <>
-            <div className="container py-24">
+            <div className="container py-24 h-[100vh]">
               <h2 className="text-center">
                 <span className="text-primaryColor">Trending{" "}</span>
                 Blog
@@ -40,7 +40,7 @@ const Blog = async () => {
           <h3 className="text-center py-24">No Blogs.</h3>
         )
       }
-    </div>
+    </>
   )
 }
 

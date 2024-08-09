@@ -162,8 +162,8 @@ const ProfileDetails = ({ profile, params }) => {
   }
 
   return (
-    <div className="p-3 my-5 container">
-      <div className="text-center text-primaryColor pb-20">
+    <div className="container pb-24">
+      <div className="text-center text-primaryColor pb-16">
         <h2>Profile</h2>
       </div>
 
