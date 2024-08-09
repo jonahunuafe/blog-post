@@ -18,7 +18,7 @@ async function getUserData(params) {
 const UserProfile = async ({params}) => {
     const profile = await getUserData(params)
   return (
-    <div>
+    <div className='py-24 h-[100vh]'>
       <ProfileDetails profile={profile} params={params} />
     </div>
   )

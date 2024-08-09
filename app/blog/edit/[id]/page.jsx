@@ -206,7 +206,7 @@ const EditBlog = ({ params }) => {
   }
 
   return (
-    <section className="container max-w-3xl">
+    <section className="container max-w-3xl py-24">
       <h2 className="mb-5">
         <span className="special-word">Edit</span> Blog
       </h2>

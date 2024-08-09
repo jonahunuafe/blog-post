@@ -221,7 +221,7 @@ const BlogDetails = ({ params }) => {
     <section className="container max-w-3xl overflow-hidden">
       {blogDetails?.authorId?._id.toString() ===
         session?.user?._id.toString() && (
-        <div className="flex items-center justify-end gap-5">
+        <div className="flex items-center justify-end gap-5 mt-14 -mb-3">
           <Link
             href={`/blog/edit/${params.id}`}
             className="flex items-center gap-1 text-primaryColor"
