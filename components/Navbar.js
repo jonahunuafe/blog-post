@@ -16,9 +16,7 @@ const Navbar = () => {
 
     const pathname = usePathname();
 
-    const [showDropdown, setShowDropdown] = useState(false)
-
-    const [style, setStyle] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     async function fetchUser() {
         try {
@@ -39,9 +37,6 @@ const Navbar = () => {
     const handleShowDropdown = () => setShowDropdown(prev => true)
     const handleHideDropdown = () => setShowDropdown(prev => false)
 
-    const disappear = () => {
-        setStyle(!false)
-    }
 
   return (
     <div className='py-2 px-4 md:px-8 h-16 flex items-center justify-between fixed bg-gray-800 w-[100%]'>
@@ -52,23 +47,6 @@ const Navbar = () => {
         </Link>
 
         <ul className='flex items-center gap-3'>
-            {/* <div>
-                <AiOutlineBars 
-                    onClick={handleShowDropdown}
-
-                />
-
-                {
-                    showDropdown && (
-                        <p>
-                            <AiOutlineClose 
-                                onClick={handleHideDropdown}
-                            />
-                            <h3>Good</h3>
-                        </p>
-                    )
-                }
-            </div> */}
             <li>
                 <Link href="/blog" className={ pathname === '/blog' ? "text-primaryColor font-bold" : ""}>Blog</Link>
             </li>

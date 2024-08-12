@@ -30,7 +30,7 @@ const LoginForm = () => {
     }
 
   //Regular expression pattern for a basic email validation
-  const pattern = /^[a-zA-z0-9._-]+@[a-zA-z0-9.-]+\.[a-zA-Z]{2,4}/
+  const pattern = /^[a-zA-z0-9._-]+@[a-zA-z0-9.-]+\.[a-zA-Z]{2,4}$/
 
   if(!pattern.test(email)) {
     setError("Please enter a valid email address.")
