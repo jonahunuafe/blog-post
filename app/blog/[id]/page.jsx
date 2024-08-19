@@ -337,7 +337,7 @@ const BlogDetails = ({ params }) => {
         </div>
       </div>
 
-      <div>
+      <div className="mb-12">
         {!session?.user && (
           <h3 className="text-red-500">Kindly login to leave a comment.</h3>
         )}
